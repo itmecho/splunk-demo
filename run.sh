@@ -30,4 +30,6 @@ Splunk started successfully!
     Host:     http://localhost:8000
     Username: admin
     Password: supersecret
+
+To generate more logs, go to http://localhost:8080
 EOF
