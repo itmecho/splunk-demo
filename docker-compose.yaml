@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  splunk:
+    image: splunk/splunk:latest
+    ports:
+      - 8000:8000
+    environment:
+      SPLUNK_START_ARGS: --accept-license
+      SPLUNK_PASSWORD: supersecret
+
+  uf:
+    image: splunk/universalforwarder:latest
+    environment:
+      SPLUNK_START_ARGS: --accept-license
+      SPLUNK_PASSWORD: supersecret
+    volumes:
+      - nginx-logs:/var/log/nginx
+      - ./inputs.conf:/opt/splunkforwarder/etc/apps/search/local/inputs.conf
+      - ./outputs.conf:/opt/splunkforwarder/etc/system/local/outputs.conf
+
+  nginx:
+    image: nginx:stable
+    ports:
+      - 8080:80
+    volumes:
+      - nginx-logs:/var/log/nginx
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+
+volumes:
+  nginx-logs:
