@@ -25,7 +25,7 @@ services:
 
   fluentd:
     build:
-      context: .
+      context: fluentd
       dockerfile: Dockerfile.fluentd
     command:
       - fluentd
