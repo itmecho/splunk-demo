@@ -1,0 +1,4 @@
+FROM fluent/fluentd:latest
+
+RUN apk add --no-cache ruby-dev alpine-sdk && gem install fluent-plugin-splunk-hec
+
